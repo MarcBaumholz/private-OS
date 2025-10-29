@@ -2,11 +2,36 @@ import { GoogleGenAI, Modality } from "@google/genai";
 import type { Habit, Todo, WeeklyGoal, CalendarEvent, CoreValue } from '../types';
 import { CORE_VALUES } from '../constants';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+// Only initialize AI service if API key is available
+const getAI = () => {
+  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return null;
+  }
+  try {
+    return new GoogleGenAI({ apiKey });
+  } catch (error) {
+    console.warn("Failed to initialize AI service:", error);
+    return null;
+  }
+};
 
+const ai = getAI();
 const model = 'gemini-2.5-flash';
 
 export const getDailyBrief = async (): Promise<string> => {
+  if (!ai) {
+    return `## Daily Brief
+
+### Tech News
+Stay updated with the latest in technology and productivity tools.
+
+### Productivity Tip
+Break large tasks into smaller, manageable chunks. This makes progress feel more achievable and helps maintain momentum throughout the day.
+
+### Motivation
+"Success is the sum of small efforts repeated day in and day out." - Robert Collier`;
+  }
   try {
     const response = await ai.models.generateContent({
         model: model,
@@ -22,6 +47,20 @@ export const getDailyBrief = async (): Promise<string> => {
 export const generateWeeklySummary = async (data: { habits: Habit[]; todos: Todo[]; journalEntry: string }): Promise<string> => {
     const completedHabits = data.habits.filter(h => h.completed).map(h => h.name).join(', ') || 'None';
     const completedTodos = data.todos.filter(t => t.completed).map(t => t.text).join(', ') || 'None';
+
+    if (!ai) {
+        return `## Weekly Summary
+
+### Your Progress This Week
+
+Great job on completing ${completedHabits ? `your habits: ${completedHabits}` : 'your daily routines'}!
+
+**Completed Tasks:**
+${completedTodos !== 'None' ? completedTodos : 'No tasks completed yet, but every journey begins with a single step!'}
+
+### Keep Going!
+Consistency is key. Keep building momentum and celebrating your small wins along the way.`;
+    }
 
     const prompt = `
 You are an AI assistant for a 'Life OS' app. Analyze the user's daily data and generate a motivational summary for their week.
@@ -49,6 +88,21 @@ Based on this, generate a warm and motivational summary celebrating their weekly
 };
 
 export const analyzeBrainDump = async (text: string): Promise<string> => {
+    if (!ai) {
+        return `## Brain Dump Analysis
+
+### Your Thoughts
+${text}
+
+### Quick Organization
+- Review your notes above
+- Identify main themes
+- Break down into actionable items
+- Set priorities for what matters most
+
+*Note: AI-powered analysis requires an API key. For now, use this space to manually organize your thoughts.*`;
+    }
+
     const prompt = `
 You are an expert AI assistant skilled in productivity and organization.
 Analyze the following 'brain dump' from a user. Your task is to organize the thoughts into a structured mind map format.
@@ -76,6 +130,9 @@ Provide the analysis below.
 };
 
 export const generateVisionBoardImage = async (prompt: string): Promise<string> => {
+    if (!ai) {
+        return "https://picsum.photos/seed/vision/800/600"; // Fallback image
+    }
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash-image',
@@ -97,6 +154,19 @@ export const generateVisionBoardImage = async (prompt: string): Promise<string> 
 };
 
 export const suggestTasks = async (context: { weeklyGoals: WeeklyGoal[], calendarEvents: CalendarEvent[] }): Promise<string[]> => {
+    if (!ai) {
+        const suggestions: string[] = [];
+        const activeGoals = context.weeklyGoals.filter(g => !g.completed);
+        if (activeGoals.length > 0) {
+            suggestions.push(`Work on: ${activeGoals[0].text}`);
+        }
+        if (context.calendarEvents.length > 0) {
+            suggestions.push(`Prepare for: ${context.calendarEvents[0].title}`);
+        }
+        suggestions.push("Review and plan your day");
+        return suggestions.slice(0, 3);
+    }
+
     const goalsText = context.weeklyGoals.filter(g => !g.completed).map(g => `- ${g.text}`).join('\n');
     const eventsText = context.calendarEvents.map(e => `- ${e.title} at ${e.time}`).join('\n');
 
@@ -134,6 +204,13 @@ export const getJournalPrompt = async (context: { habits: Habit[] }): Promise<st
     const completedHabits = context.habits.filter(h => h.completed).map(h => h.name).join(', ') || 'none';
     const incompleteHabits = context.habits.filter(h => !h.completed).map(h => h.name).join(', ') || 'none';
     const randomValue = CORE_VALUES[Math.floor(Math.random() * CORE_VALUES.length)];
+
+    if (!ai) {
+        if (completedHabits !== 'none') {
+            return `What made it easier to complete ${completedHabits} today?`;
+        }
+        return `What is one thing that brought you joy today?`;
+    }
 
     const prompt = `
     You are a thoughtful journaling assistant. Your goal is to provide an insightful, open-ended question to help the user reflect on their day.
