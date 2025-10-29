@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Life OS AI Dashboard</title>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script takes the current url and converts the path and query
+      // string into just a query string, and then redirects the browser
+      // to the new url with only a query string and hash fragment,
+      // e.g., https://www.foo.com/one/two?a=b&c=d#qwe, becomes
+      // https://www.foo.com/private-OS/?/one/two&a=b~and~c=d#qwe
+      // Note: this 404.html file must be at least 512 bytes for some
+      // browsers to see it as a valid 404 page.
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+  </head>
+  <body>
+    <script>
+      // Redirect to index.html with the path as query parameter
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+      var query = path.split('/').filter(function(p) { return p.length > 0 && p !== 'private-OS'; }).join('/');
+      if (query.length > 0) {
+        window.location.replace('/private-OS/?' + query + (search.length > 1 ? '&' + search.slice(1) : '') + hash);
+      } else {
+        window.location.replace('/private-OS/');
+      }
+    </script>
+  </body>
+</html>
+
