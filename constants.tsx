@@ -10,31 +10,59 @@ export const INITIAL_GOALS: Goal[] = [
     id: 1,
     title: "Run a Marathon",
     imageUrl: "https://picsum.photos/seed/marathon/800/600",
-    why: "To push my physical and mental limits, proving to myself that I can achieve monumental goals through discipline and perseverance."
+    why: "To push my physical and mental limits, proving to myself that I can achieve monumental goals through discipline and perseverance.",
+    category: "health",
+    progress: 15,
+    status: "active",
+    createdAt: new Date().toISOString(),
+    tags: ["fitness", "endurance"],
+    relatedHabits: [2] // Workout habit
   },
   {
     id: 2,
     title: "Learn a New Language",
     imageUrl: "https://picsum.photos/seed/language/800/600",
-    why: "To connect with new cultures, expand my worldview, and challenge my mind in a completely new way."
+    why: "To connect with new cultures, expand my worldview, and challenge my mind in a completely new way.",
+    category: "mind",
+    progress: 30,
+    status: "active",
+    createdAt: new Date().toISOString(),
+    tags: ["learning", "culture"],
+    relatedHabits: [4] // Read habit
   },
   {
     id: 3,
     title: "Launch a Side Project",
     imageUrl: "https://picsum.photos/seed/project/800/600",
-    why: "To build something from the ground up, learn new skills in design and development, and create a potential new stream of income."
+    why: "To build something from the ground up, learn new skills in design and development, and create a potential new stream of income.",
+    category: "career",
+    progress: 45,
+    status: "active",
+    createdAt: new Date().toISOString(),
+    tags: ["entrepreneurship", "development"],
+    relatedHabits: [5] // Plan habit
   },
   {
     id: 4,
     title: "Master a Musical Instrument",
     imageUrl: "https://picsum.photos/seed/music/800/600",
-    why: "To express my creativity through music, enjoy the meditative process of practice, and be able to play my favorite songs."
+    why: "To express my creativity through music, enjoy the meditative process of practice, and be able to play my favorite songs.",
+    category: "mind",
+    progress: 20,
+    status: "active",
+    createdAt: new Date().toISOString(),
+    tags: ["creativity", "music"]
   },
   {
     id: 5,
     title: "Travel to Southeast Asia",
     imageUrl: "https://picsum.photos/seed/travel/800/600",
-    why: "To experience diverse cultures, taste incredible food, and see breathtaking landscapes that are completely different from my own."
+    why: "To experience diverse cultures, taste incredible food, and see breathtaking landscapes that are completely different from my own.",
+    category: "contribution",
+    progress: 60,
+    status: "active",
+    createdAt: new Date().toISOString(),
+    tags: ["travel", "adventure", "culture"]
   }
 ];
 
