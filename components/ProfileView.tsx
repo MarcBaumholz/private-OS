@@ -1,5 +1,5 @@
 import React from 'react';
-import VisionBoard from './VisionBoard';
+import VisionBoardEnhanced from './VisionBoardEnhanced';
 import CoreValues from './CoreValues';
 import LifeAreas from './LifeAreas';
 import type { Goal, Habit } from '../types';
@@ -16,7 +16,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ goals, setGoals, habits }) =>
       <h1 className="text-3xl font-bold text-slate-200">My Life Blueprint</h1>
       <CoreValues />
       <LifeAreas />
-      <VisionBoard goals={goals} setGoals={setGoals} habits={habits} />
+      <VisionBoardEnhanced goals={goals} setGoals={setGoals} habits={habits} />
     </div>
   );
 };
