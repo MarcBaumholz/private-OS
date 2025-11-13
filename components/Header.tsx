@@ -19,6 +19,7 @@ const Header: React.FC<HeaderProps> = ({ activeView, setActiveView }) => {
   const inactiveButtonClass = "bg-transparent text-slate-300 hover:bg-slate-700/50";
   const dailyActiveButtonClass = "bg-cyan-500 text-white shadow-md shadow-cyan-500/20";
   const weeklyActiveButtonClass = "bg-indigo-500 text-white shadow-md shadow-indigo-500/20";
+  const journalActiveButtonClass = "bg-purple-500 text-white shadow-md shadow-purple-500/20";
   
   return (
     <header className="sticky top-0 z-40 w-full bg-slate-900/80 backdrop-blur-sm border-b border-slate-700">
@@ -37,6 +38,12 @@ const Header: React.FC<HeaderProps> = ({ activeView, setActiveView }) => {
                 className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeView === 'weekly' ? weeklyActiveButtonClass : inactiveButtonClass}`}
             >
                 Weekly
+            </button>
+            <button
+                onClick={() => setActiveView('journal')}
+                className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeView === 'journal' ? journalActiveButtonClass : inactiveButtonClass}`}
+            >
+                Journal
             </button>
             </div>
             <button 

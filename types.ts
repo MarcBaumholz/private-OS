@@ -1,7 +1,7 @@
 // Fix: Added import for ReactNode to fix 'Cannot find namespace React' error.
 import type { ReactNode } from 'react';
 
-export type View = 'daily' | 'weekly' | 'profile';
+export type View = 'daily' | 'weekly' | 'profile' | 'journal';
 
 export type GoalStatus = 'active' | 'completed' | 'archived';
 
@@ -63,4 +63,47 @@ export interface LifeArea {
     name: string;
     description: string;
     icon: ReactNode;
+}
+
+// Journal Types
+export type NotionBlockType =
+  | 'paragraph'
+  | 'heading_1'
+  | 'heading_2'
+  | 'heading_3'
+  | 'bulleted_list_item'
+  | 'numbered_list_item'
+  | 'to_do'
+  | 'quote'
+  | 'callout'
+  | 'code'
+  | 'divider';
+
+export interface NotionBlock {
+  id: string;
+  type: NotionBlockType;
+  text?: string;
+  level?: number; // For headings (1, 2, 3)
+  checked?: boolean; // For to_do items
+  icon?: string; // For callouts
+  language?: string; // For code blocks
+}
+
+export interface JournalEntry {
+  id: string;
+  title: string;
+  date: string | null; // ISO date string
+  mood: number | null; // 1-10
+  sleepQuality: string;
+  priority: string[];
+  content: NotionBlock[];
+  notionUrl: string;
+  lastEdited: string; // ISO datetime string
+  createdTime: string; // ISO datetime string
+}
+
+export interface JournalData {
+  entries: JournalEntry[];
+  lastSync: string; // ISO datetime string
+  totalEntries: number;
 }
