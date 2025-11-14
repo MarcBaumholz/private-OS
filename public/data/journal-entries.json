@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "id": "2abd42a1-faf5-8175-99f3-c200798087f4",
+      "title": "Tagesplan",
+      "date": "2025-11-14T16:35:00.000+01:00",
+      "mood": null,
+      "sleepQuality": "",
+      "priority": [],
+      "content": [
+        {
+          "id": "2abd42a1-faf5-815c-b5cb-d7de7e1ea686",
+          "type": "paragraph",
+          "text": "- Heute\n\n  - 9:00 Uhr – 9:30 Uhr  \n    Morgenroutine\n\n  - 10:00 Uhr – 12:00 Uhr  \n    Deep Work Session\n\n  - 12:00 Uhr – 13:00 Uhr  \n    Mittagessen"
+        }
+      ],
+      "notionUrl": "https://www.notion.so/Tagesplan-2abd42a1faf5817599f3c200798087f4",
+      "lastEdited": "2025-11-14T15:35:00.000Z",
+      "createdTime": "2025-11-14T15:35:00.000Z"
+    },
+    {
+      "id": "2aad42a1-faf5-815e-8965-f3308823f147",
+      "title": "Tagesplan",
+      "date": "2025-11-13T20:20:00.000+01:00",
+      "mood": null,
+      "sleepQuality": "",
+      "priority": [],
+      "content": [
+        {
+          "id": "2aad42a1-faf5-818d-8615-f6e5daaa8610",
+          "type": "paragraph",
+          "text": "- **Heute**\n  - **9:00 - 9:30** Morgenroutine"
+        }
+      ],
+      "notionUrl": "https://www.notion.so/Tagesplan-2aad42a1faf5815e8965f3308823f147",
+      "lastEdited": "2025-11-13T19:20:00.000Z",
+      "createdTime": "2025-11-13T19:20:00.000Z"
+    },
+    {
       "id": "2aad42a1-faf5-81cb-b94b-c4e5c14dcee6",
       "title": "Tagesplan",
       "date": "2025-11-12T09:04:00.000+01:00",
@@ -10658,6 +10694,6 @@
       "createdTime": "2022-07-01T11:36:00.000Z"
     }
   ],
-  "lastSync": "2025-11-13T14:26:57.262Z",
-  "totalEntries": 121
+  "lastSync": "2025-11-14T15:49:25.780Z",
+  "totalEntries": 123
 }
